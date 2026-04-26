@@ -259,3 +259,8 @@ This project demonstrates *SQL-based data cleaning* applied to the Airbnb NYC 20
 - *Standardization Rules:* Maintain consistent casing and formats across text/date fields.  
 - *Outlier Monitoring:* Apply thresholds for numeric columns to prevent unrealistic values.  
 - *Documentation:* Continue recording queries, outputs, and cleaning steps for evaluator review.
+
+## 👤 Author
+
+**Aman Raj**
+- GitHub: [@Aman-raj048](https://github.com/Aman-raj048)
