@@ -2,21 +2,45 @@
 
 ## Project Overview
 
-**Project Title**: Retail Sales Analysis  
+**Project Title**: Airbnb NYC Listings Data Cleaning  
 **Level**: Beginner  
 **Database**: `ab_nyc_2019`
 
-This project is part of the OIBSIP internship program and demonstrates SQL skills applied to retail sales data. The goal is to import, clean, and analyze transactional data to uncover customer behavior, product performance, and sales trends. The project involves setting up a retail sales database, performing exploratory data analysis (EDA), and answering business-driven questions through SQL queries. It is designed for learners starting their journey in data analytics and aiming to build a solid foundation in SQL with practical insights.
+This project is part of the OIBSIP internship program and demonstrates SQL skills applied to the Airbnb NYC 2019 dataset. The goal is to import raw listing data, clean it by handling missing values, duplicates, inconsistencies, and outliers, and prepare a reliable dataset for further use. The project emphasizes professional pipeline design and evaluator‑friendly documentation.
+
+
+
+## About Dataset
+
+*Context:*  
+Since 2008, guests and hosts have used Airbnb to expand traveling possibilities and present more unique, personalized ways of experiencing the world. The dataset used, describes the listing activity and metrics in NYC for 2019.  
+
+*Content:*  
+The dataset includes host details, geographical availability, and metrics needed to ensure integrity and consistency.  
+
+*Acknowledgements:*  
+This public dataset is part of Airbnb, and the original source can be found on the Airbnb open data portal.
+
 
 ## Objectives
 
-- *Dataset Input:* Import the provided retail dataset into the `retail_sales` database using MySQL Workbench for analysis.  
-- *Database Setup:* Create and populate tables with retail sales records.  
-- *Data Cleaning:* Handle missing values, duplicates, and ensure data consistency.  
-- *Exploratory Data Analysis (EDA):* Run SQL queries to understand customer demographics, product categories, and monthly sales trends.  
-- *Business Insights:* Use SQL to answer targeted business questions (e.g., top spending age group, gender spending share, seasonal peaks).  
-- *Visualization:* Export query results to CSV and build charts (bar, pie, line, heatmap) in Excel for clear communication.  
-- *Final Report:* Document queries, outputs, and insights in a professional format for internship submission.
+- *Dataset Input:* Import the provided Airbnb dataset into the ab_nyc_2019 database using MySQL Workbench.  
+- *Database Setup:* Create and populate the listings table with Airbnb records.  
+- *Data Cleaning:*  
+  - Handle missing values with imputation or removal.  
+  - Identify and eliminate duplicate records.  
+  - Standardize formats (dates, text casing, numeric ranges).  
+  - Detect and address outliers that may skew results.  
+- *Final Report:* Document queries, outputs, and cleaning steps in a professional format for internship submission.
+
+
+## Key Concepts and Challenges
+- *Data Integrity:* Ensuring accuracy, consistency, and reliability throughout the cleaning process.  
+- *Missing Data Handling:* Addressing null values with imputation or informed removal.  
+- *Duplicate Removal:* Maintaining uniqueness by eliminating duplicate records.  
+- *Standardization:* Applying consistent formatting and units across the dataset.  
+- *Outlier Detection:* Identifying and addressing extreme values that distort the dataset.
+
 
 ## Project Structure
 
@@ -169,67 +193,66 @@ SET price = LEAST(price,1000),
 
 ## Findings
 
-- *Customer Demographics:*  
-  - Dataset covers multiple age groups.  
-  - Age group *46–55* contributed the highest overall spend (₹100,690).  
-  - Age group *18–25* had the highest average spend per transaction (₹500.30).  
-  - Gender analysis shows *Female customers* spent slightly more overall (₹232,840) compared to Males (₹223,160).  
+- *Data Integrity:*  
+  - Query 1 returned 0 invalid rows → dataset passed completeness & validity checks.  
+  - All primary keys, ranges, and constraints are valid.  
 
-- *High‑Value Transactions:*  
-  - Maximum transaction value recorded was *₹2,000, minimum was *₹25**.  
-  - Clear spending tiers observed: premium (₹2000), mid‑range (₹900–₹1500), and budget (<₹500).  
-  - Standard deviation ≈ *₹559.71*, indicating wide variation in transaction amounts.  
+- *Missing Data:*  
+  - Multiple columns had NULL values (e.g., price, minimum_nights, reviews_per_month).  
+  - Imputation applied with defaults:  
+    - Text → 'Unknown'  
+    - Numeric → 0 or realistic bounds  
+    - Date → '2000-01-01'  
 
-- *Sales Trends:*  
-  - *Quarterly Sales (2023):* Q4 (₹126,190) and Q2 (₹123,735) were strongest; Q3 dipped to ₹96,045.  
-  - *Monthly Sales (2023):* Peaks in *May (₹53,150), **October (₹46,580), and **December (₹44,690)*.  
-  - Lowest month: *September (₹23,620)*.  
-  - 2024 data begins with January (₹1,530).  
+- *Duplicate Records:*  
+  - Duplicate listing IDs and full row duplicates were identified and removed.  
+  - Dataset now maintains uniqueness across all 16 attributes.  
 
-- *Product Insights:*  
-  - *Electronics (₹156,905)* and *Clothing (₹155,580)* were top revenue drivers.  
-  - *Beauty (₹143,515)* followed closely.  
-  - Average price per unit ranged between *₹174–₹184*, with min ₹25 and max ₹500 across categories.
- 
+- *Standardization:*  
+  - Text columns normalized (trimmed, casing fixed).  
+  - Numeric ranges corrected (availability_365 capped between 0–365).  
+  - Dates standardized to YYYY-MM-DD format.  
 
-- *Visualization:*  
-  - Insights were presented through *bar charts (age groups, product categories), **pie charts (gender spending), **line charts (monthly sales trends), and **heatmaps (customer frequency)*.  
-  - These visuals made the findings clear and professional for reporting.
+- *Outlier Detection:*  
+  - Query 6 flagged rows with extreme values (price > 1000, minimum_nights > 365, reviews_per_month > 30).  
+  - Some rows showed *NULLs across multiple numeric attributes*, requiring correction.  
+
+- *Outlier Capping:*  
+  - Extreme values capped to realistic limits:  
+    - price ≤ 1000  
+    - minimum_nights ≤ 365  
+    - reviews_per_month ≤ 30  
+    - availability_365 ≤ 365  
+  - Dataset stabilized for downstream use.  
 
 ## Reports
 
-- *Sales Summary:*  
-  1000 transactions analyzed across three product categories (Electronics, Clothing, Beauty).  
+  - *Cleaning Summary:*  
+  - *16 columns processed* for missing data, duplicates, standardization, and outlier handling.  
+  - All invalid rows corrected or removed.  
+  - Dataset integrity ensured with consistent formatting and ranges.  
 
-- *Trend Analysis:*  
-  Seasonal peaks in May, October, and December highlight festive demand. September shows off‑season slowdown.  
+- *Validation Checks:*  
+  - Post-cleaning queries confirm:  
+    - No invalid IDs, coordinates, or dates.  
+    - Outliers capped to realistic thresholds.  
+    - Duplicates eliminated.  
+    - Missing values imputed.  
 
-- *Customer Insights:*  
-  - Top spending age group: *46–55*.  
-  - Highest average spend: *18–25*.  
-  - Female customers slightly outspend males.  
-  - Transaction tiers reveal premium, mid‑range, and budget shoppers.  
+- *Dataset Readiness:*  
+  - The listings table is now *clean, standardized, and reliable*.  
+  - Ready for accurate analysis, visualization, or predictive modeling.  
+  - Documentation of each cleaning step ensures transparency for evaluators. 
 
-- *Product Analysis:*  
-  - Electronics and Clothing dominate revenue, Beauty remains strong.  
-  - Price distribution consistent across categories (₹25–₹500).
- 
-- *Visualization Report:*  
-  Charts and graphs were created in Excel to highlight demographics, product performance, and seasonal trends.
 
 ## Conclusion
 
-- This project demonstrates SQL‑based retail sales analysis using the retail_sales database.  
-- By importing the dataset into MySQL Workbench, cleaning records, running exploratory queries, and visualizing results, we uncovered actionable insights on demographics, product performance, transaction behavior, and seasonal trends.  
-- The combination of SQL queries and clear visualizations ensures findings are both data‑driven and easy to interpret, supporting business decisions effectively. 
+This project demonstrates *SQL-based data cleaning* applied to the Airbnb NYC 2019 dataset (ab_nyc_2019, listings table). By systematically handling missing values, duplicates, standardization, and outliers, the dataset was transformed into a reliable and consistent form. The cleaned dataset is now ready for accurate analysis and professional reporting.
 
 ## Recommendations
-Based on the exploratory data analysis (EDA), the following recommendations can help improve retail performance:
-
-- **Target High-Spending Age Groups:** Focus marketing campaigns on customers aged **46–55** (highest total spend) and **18–25** (highest average spend per transaction).
-- **Gender-Based Promotions:** Since female customers slightly outspend males, design loyalty programs or offers tailored to female shoppers while encouraging male engagement.
-- **Seasonal Campaigns:** Align promotions with peak months (**May, October, December**) and plan inventory accordingly. Address low-demand months like **September** with discounts or special events.
-- **Product Strategy:** Electronics and Clothing drive the most revenue; prioritize these categories for promotions, while maintaining growth in Beauty products.
-- **Transaction Segmentation:** Identify premium buyers (₹2000 transactions) for exclusive offers, mid-range buyers (₹900–₹1500) for bundled deals, and budget shoppers (<₹500) for volume-based discounts.
-- **Pricing Optimization:** Maintain competitive pricing within the ₹25–₹500 range, ensuring affordability while sustaining margins.
-- **Visualization Use:** Continue leveraging charts (bar, pie, line, heatmap) to monitor trends and communicate insights effectively to stakeholders.
+- *Automate Integrity Checks:* Regularly run queries to catch invalid rows early.  
+- *Schema Validation:* Enforce constraints (CHECK, NOT NULL) at database level.  
+- *Duplicate Prevention:* Use unique keys (id) and indexing to avoid duplicate inserts.  
+- *Standardization Rules:* Maintain consistent casing and formats across text/date fields.  
+- *Outlier Monitoring:* Apply thresholds for numeric columns to prevent unrealistic values.  
+- *Documentation:* Continue recording queries, outputs, and cleaning steps for evaluator review.
