@@ -12,14 +12,14 @@ This project is part of the OIBSIP internship program and demonstrates SQL skill
 
 ## About Dataset
 
-*Context:*  
-Since 2008, guests and hosts have used Airbnb to expand traveling possibilities and present more unique, personalized ways of experiencing the world. The dataset used, describes the listing activity and metrics in NYC for 2019.  
+- *Context:*  Since 2008, guests and hosts have used Airbnb to expand traveling possibilities and present more unique, personalized ways of experiencing the world. The dataset used, describes the listing activity and metrics in NYC for 2019.  
 
-*Content:*  
-The dataset includes host details, geographical availability, and metrics needed to ensure integrity and consistency.  
+- *Content:*  The dataset includes host details, geographical availability, and metrics needed to ensure integrity and consistency.  
 
-*Acknowledgements:*  
-This public dataset is part of Airbnb, and the original source can be found on the Airbnb open data portal.
+- *Acknowledgements:* 
+  - Dataset sourced from Airbnb public data.  
+  - Original dataset available on Kaggle: [New York City Airbnb Open Data](https://www.kaggle.com/datasets/dgomonov/new-york-city-airbnb-open-data)  
+  - Project developed under the OIBSIP internship program to demonstrate SQL data cleaning skills.
 
 
 ## Objectives
