@@ -2,8 +2,7 @@
 
 ## Project Overview
 
-**Project Title**: Airbnb NYC Listings Data Cleaning  
-**Level**: Beginner  
+**Project Title**: Airbnb NYC Listings Data Cleaning   
 **Database**: `ab_nyc_2019`
 
 This project is part of the OIBSIP internship program and demonstrates SQL skills applied to the Airbnb NYC 2019 dataset. The goal is to import raw listing data, clean it by handling missing values, duplicates, inconsistencies, and outliers, and prepare a reliable dataset for further use. The project emphasizes professional pipeline design and evaluator‑friendly documentation.
